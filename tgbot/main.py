@@ -12,7 +12,7 @@ async def main():
     # Диспетчер
     dp = Dispatcher(storage=MemoryStorage(), fsm_strategy=FSMStrategy.GLOBAL_USER)
     dp.include_routers(suggestion.router)
-    await dp.start_polling(bot)
+    await dp.start_polling(bot, imge={})
 
 
 if __name__ == "__main__":

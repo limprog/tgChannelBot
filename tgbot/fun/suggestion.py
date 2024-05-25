@@ -60,8 +60,7 @@ async def start(meg: Message):
 
 
 @router.callback_query(F.data.startswith("sug"))
-async def post1(callback: CallbackQuery, state: FSMContext, bot:Bot):
-    global imge
+async def post1(callback: CallbackQuery, state: FSMContext, bot:Bot, imge: dict):
     await state.clear()
     await state.set_state(Post.text)
     await state.update_data(chanel_id=callback.data.split('_')[1])
@@ -79,8 +78,7 @@ async def process_name(message: Message, state: FSMContext):
 
 
 @router.message(Post.img, F.photo)
-async def img_post(meg: Message, state: FSMContext, bot: Bot):
-    global imge
+async def img_post(meg: Message, state: FSMContext, bot: Bot, imge: dict):
 
     await bot.download(meg.photo[-1], os.path.join("imge_post", f"{meg.photo[-1].file_unique_id}.jpg"))
     imge[meg.from_user.id].append(os.path.join("imge_post", f"{meg.photo[-1].file_unique_id}.jpg"))
